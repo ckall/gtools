@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	//初始化ding模块
 	initDingTalk = make(map[string]*ding.DingTalk)
 )
 
@@ -13,23 +14,21 @@ type dingTalk struct {
 	name string
 }
 
+//公共消息体
 type dingPublicMessageBody struct {
+	name    string
 	context string
 	opt     []ding.AtOption
 }
 
-//
+//MarkDown消息类型
 type dingMarkdown struct {
-	name  string
 	title string
 	dingPublicMessageBody
 }
 
-//
-type dingText struct {
-	name string
-	dingPublicMessageBody
-}
+//Text消息类型
+type dingText = dingPublicMessageBody
 
 /**
  * @auth: kuncheng
@@ -47,6 +46,7 @@ func InitSecretDing(name, token string, secret string) {
 	initDingTalk[name] = ding.InitDingTalkWithSecret(token, secret)
 }
 
+//ding模块
 func Ding(name string) *dingTalk {
 	return &dingTalk{
 		name: name,
@@ -56,9 +56,9 @@ func Ding(name string) *dingTalk {
 //发送Markdown消息
 func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
 	initMarkDown := &dingMarkdown{
-		name:  ding.name,
 		title: title,
 	}
+	initMarkDown.name = ding.name
 	initMarkDown.context = context
 	initMarkDown.opt = opt
 	return initMarkDown
@@ -74,6 +74,7 @@ func (ding *dingTalk) Text(context string, opt ...ding.AtOption) *dingText {
 	return initText
 }
 
+//发送
 func (ding *dingText) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendTextMessage(ding.context, ding.opt...)
