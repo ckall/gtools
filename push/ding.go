@@ -54,7 +54,7 @@ func Ding(name string) *dingTalk {
 }
 
 //发送Markdown消息
-func (ding *dingTalk) SendMarkdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
+func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
 	initMarkDown := &dingMarkdown{
 		name:  ding.name,
 		title: title,
@@ -65,7 +65,7 @@ func (ding *dingTalk) SendMarkdown(title, context string, opt ...ding.AtOption) 
 }
 
 //发送Text消息
-func (ding *dingTalk) SendText(context string, opt ...ding.AtOption) *dingText {
+func (ding *dingTalk) Text(context string, opt ...ding.AtOption) *dingText {
 	initText := &dingText{
 		name: ding.name,
 	}
