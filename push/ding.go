@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	initdingTalk = make(map[string]*ding.DingTalk)
+	initDingTalk = make(map[string]*ding.DingTalk)
 )
 
 type dingTalk struct {
@@ -75,14 +75,14 @@ func (ding *dingTalk) SendText(context string, opt ...ding.AtOption) *dingText {
 }
 
 func (ding *dingText) Send() error {
-	if talk, ok := initdingTalk[ding.name]; ok {
+	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendTextMessage(ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
 }
 
 func (ding *dingMarkdown) Send() error {
-	if talk, ok := initdingTalk[ding.name]; ok {
+	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
