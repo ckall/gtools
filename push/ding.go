@@ -6,8 +6,8 @@ import (
 )
 
 type DingTalk interface {
-	Markdown(title, context string, opt ...ding.AtOption) *dingMarkdown
-	Text(context string, opt ...ding.AtOption) *dingText
+	Markdown(title, context string, opt ...ding.AtOption) DingMarkdown
+	Text(context string, opt ...ding.AtOption) DingText
 }
 
 type DingMarkdown interface {
@@ -60,14 +60,14 @@ func InitSecretDing(name, token string, secret string) {
 }
 
 //ding模块
-func Ding(name string) *dingTalk {
+func Ding(name string) DingTalk {
 	return &dingTalk{
 		name: name,
 	}
 }
 
 //发送Markdown消息
-func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
+func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) DingMarkdown {
 	initMarkDown := &dingMarkdown{
 		title: title,
 	}
@@ -78,7 +78,7 @@ func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) *din
 }
 
 //发送Text消息
-func (ding *dingTalk) Text(context string, opt ...ding.AtOption) *dingText {
+func (ding *dingTalk) Text(context string, opt ...ding.AtOption) DingText {
 	initText := &dingText{
 		name: ding.name,
 	}
@@ -95,6 +95,7 @@ func (ding *dingText) Send() error {
 	return errors.New("类型错误")
 }
 
+//发送
 func (ding *dingMarkdown) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
