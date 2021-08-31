@@ -6,10 +6,10 @@ import (
 )
 
 var (
-	dingTalk = make(map[string]*ding.DingTalk)
+	initdingTalk = make(map[string]*ding.DingTalk)
 )
 
-type DingTalk struct {
+type dingTalk struct {
 	name string
 }
 
@@ -39,22 +39,22 @@ type dingText struct {
 //tokens 可以发送给多个群
 //key 每个群的多个关键字验证
 func InitKeyWordDing(name, tokens string, title string) {
-	dingTalk[name] = ding.InitDingTalk(tokens, title)
+	initdingTalk[name] = ding.InitDingTalk(tokens, title)
 }
 
 //签名规则
-func InitSignDing(name, token string, secret string) {
-	dingTalk[name] = ding.InitDingTalkWithSecret(token, secret)
+func InitSecretDing(name, token string, secret string) {
+	initdingTalk[name] = ding.InitDingTalkWithSecret(token, secret)
 }
 
-func Ding(name string) *DingTalk {
-	return &DingTalk{
+func Ding(name string) *dingTalk {
+	return &dingTalk{
 		name: name,
 	}
 }
 
 //发送Markdown消息
-func (ding *DingTalk) SendMarkdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
+func (ding *dingTalk) SendMarkdown(title, context string, opt ...ding.AtOption) *dingMarkdown {
 	initMarkDown := &dingMarkdown{
 		name:  ding.name,
 		title: title,
@@ -65,7 +65,7 @@ func (ding *DingTalk) SendMarkdown(title, context string, opt ...ding.AtOption) 
 }
 
 //发送Text消息
-func (ding *DingTalk) SendText(context string, opt ...ding.AtOption) *dingText {
+func (ding *dingTalk) SendText(context string, opt ...ding.AtOption) *dingText {
 	initText := &dingText{
 		name: ding.name,
 	}
@@ -75,14 +75,14 @@ func (ding *DingTalk) SendText(context string, opt ...ding.AtOption) *dingText {
 }
 
 func (ding *dingText) Send() error {
-	if talk, ok := dingTalk[ding.name]; ok {
+	if talk, ok := initdingTalk[ding.name]; ok {
 		return talk.SendTextMessage(ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
 }
 
 func (ding *dingMarkdown) Send() error {
-	if talk, ok := dingTalk[ding.name]; ok {
+	if talk, ok := initdingTalk[ding.name]; ok {
 		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
