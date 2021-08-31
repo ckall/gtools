@@ -5,6 +5,19 @@ import (
 	"gck/push/ding"
 )
 
+type DingTalk interface {
+	Markdown(title, context string, opt ...ding.AtOption) *dingMarkdown
+	Text(context string, opt ...ding.AtOption) *dingText
+}
+
+type DingMarkdown interface {
+	Send() error
+}
+
+type DingText interface {
+	Send() error
+}
+
 var (
 	//初始化ding模块
 	initDingTalk = make(map[string]*ding.DingTalk)
