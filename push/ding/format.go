@@ -13,28 +13,29 @@ var (
 )
 
 type Format interface {
+	//添加一行
 	AddText(text string)
-
+	//添加图片
 	AddImage(url string)
-
+	//一次性加多个图片
 	AddImages(urls []string)
-
+	//获取处理好的数据格式
 	GetContext() string
-
+	//以key：value的数据格式
 	AddKeyValue(title string, value interface{})
-
+	//链接
 	AddTextUrl(text string, hrefs map[string]string)
-
+	//H1字段，并新增颜色模块
 	AddTextH1(context string, color ...interface{})
-
+	//H2字段，并新增颜色模块
 	AddTextH2(context string, color ...interface{})
-
+	//H3字段，并新增颜色模块
 	AddTextH3(context string, color ...interface{})
-
+	//H4字段，并新增颜色模块
 	AddTextH4(context string, color ...interface{})
-
+	//H5字段，并新增颜色模块
 	AddTextH5(context string, color ...interface{})
-
+	//H6字段，并新增颜色模块
 	AddTextH6(context string, color ...interface{})
 }
 
