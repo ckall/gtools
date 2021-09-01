@@ -6,14 +6,14 @@ import (
 )
 
 type DingTalk interface {
-	Markdown(title, context string, opt ...ding.AtOption) Markdown
+	Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown
 
-	Text(context string, opt ...ding.AtOption) Text
+	Text(context ding.Format, opt ...ding.AtOption) Text
 
-	LinkMessage(title string, text string, picUrl string, msgUrl string) LinkMessage
-}
+	//Link(title string, text ding.Context, picUrl string, msgUrl string) LinkMessage
+	//ACTION_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
+	//FEED_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
 
-type name struct {
 }
 
 type LinkMessage interface {
@@ -45,7 +45,7 @@ type uRLLink struct {
 //公共消息体
 type publicMessageBody struct {
 	dingTalk
-	context string
+	context ding.Format
 	opt     []ding.AtOption
 }
 
@@ -82,7 +82,7 @@ func Ding(name string) DingTalk {
 }
 
 //发送Markdown消息
-func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) Markdown {
+func (ding *dingTalk) Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown {
 	initMarkDown := &markdown{
 		title: title,
 	}
@@ -93,7 +93,7 @@ func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) Mark
 }
 
 //发送Text消息
-func (ding *dingTalk) Text(context string, opt ...ding.AtOption) Text {
+func (ding *dingTalk) Text(context ding.Format, opt ...ding.AtOption) Text {
 	initText := &text{}
 	initText.name = ding.name
 	initText.context = context
@@ -102,7 +102,7 @@ func (ding *dingTalk) Text(context string, opt ...ding.AtOption) Text {
 }
 
 //发送Text消息
-func (ding *dingTalk) LinkMessage(title string, text string, picUrl string, msgUrl string) LinkMessage {
+func (ding *dingTalk) Link(title string, text string, picUrl string, msgUrl string) LinkMessage {
 	initText := &uRLLink{}
 	initText.name = ding.name
 	initText.title = title
@@ -123,7 +123,7 @@ func (ding *uRLLink) Send() error {
 //发送
 func (ding *text) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
-		return talk.SendTextMessage(ding.context, ding.opt...)
+		return talk.SendTextMessage(ding.context.GetContext(), ding.opt...)
 	}
 	return errors.New("类型错误")
 }
@@ -131,7 +131,7 @@ func (ding *text) Send() error {
 //发送
 func (ding *markdown) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
-		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
+		return talk.SendMarkDownMessage(ding.title, ding.context.GetContext(), ding.opt...)
 	}
 	return errors.New("类型错误")
 }

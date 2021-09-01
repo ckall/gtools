@@ -18,8 +18,13 @@ func init() {
 }
 
 func TestDingTalk_Markdown(t *testing.T) {
+	context := ding.NewConText()
+	context.AddText("# 杭州天气")
+	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
+	context.AddText("![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)")
+	context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
 	err := push.Ding(name).
-		Markdown(title, "a", ding.WithAtMobiles([]string{"17311229673"})).
+		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
 	if err != nil {
 		t.Errorf("发送失败: %s", err.Error())
@@ -27,7 +32,15 @@ func TestDingTalk_Markdown(t *testing.T) {
 }
 
 func TestDingTalk_Text(t *testing.T) {
-	err := push.Ding(name).Text(title, ding.WithAtAll()).Send()
+	context := ding.NewConText()
+	context.AddText("# 杭州天气")
+	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
+	context.AddText("![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)")
+	context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
+	err := push.Ding(name).
+		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
+		Send()
+	err = push.Ding(name).Text(context, ding.WithAtAll()).Send()
 	if err != nil {
 		t.Errorf("发送失败: %s", err.Error())
 	}
