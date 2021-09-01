@@ -21,8 +21,10 @@ func TestDingTalk_Markdown(t *testing.T) {
 	context := ding.NewConText()
 	context.AddText("# 杭州天气")
 	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
-	context.AddText("![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)")
-	context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
+	context.AddKeyValue("#### 【测试】:", "hahah")
+	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
+	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
+	//context.AddTextUrl("###### 10点20分发布: %s %s", []string{"天气", "http://www.thinkpage.cn/","天气", "http://www.thinkpage.cn/"})
 	err := push.Ding(name).
 		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
@@ -35,8 +37,9 @@ func TestDingTalk_Text(t *testing.T) {
 	context := ding.NewConText()
 	context.AddText("# 杭州天气")
 	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
-	context.AddText("![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)")
-	context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
+	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
+	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
+	//context.AddTextUrl("###### 10点20分发布", []string{"天气", "http://www.thinkpage.cn/"})
 	err := push.Ding(name).
 		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()

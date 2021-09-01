@@ -91,24 +91,20 @@ func (d *DingTalk) OutGoing(r io.Reader) (outGoingMsg OutGoingModel, err error) 
 	return
 }
 
-func (d *DingTalk) SendTextMessage(content string, opt ...AtOption) error {
-	//content = content + d.keyWord
-	return d.sendMessage(NewTextMsg(content, opt...))
+func (d *DingTalk) SendTextMessage(content Format, opt ...AtOption) error {
+	return d.sendMessage(NewTextMsg(content.GetContext(), opt...))
 }
 
-func (d *DingTalk) SendMarkDownMessage(title, text string, opts ...AtOption) error {
-	//title = title + d.keyWord
-	return d.sendMessage(NewMarkDownMsg(title, text, opts...))
+func (d *DingTalk) SendMarkDownMessage(title string, text Format, opts ...AtOption) error {
+	return d.sendMessage(NewMarkDownMsg(title, text.GetContext(), opts...))
 }
 
 // 利用dtmd发送点击消息
 func (d *DingTalk) SendDTMDMessage(title string, dtmdMap *dingMap, opt ...AtOption) error {
-	//title = title + d.keyWord
 	return d.sendMessage(NewDTMDMsg(title, dtmdMap, opt...))
 }
 
 func (d DingTalk) SendMarkDownMessageBySlice(title string, textList []string, opts ...AtOption) error {
-	//title = title + d.keyWord
 	text := ""
 	for _, t := range textList {
 		text = text + "\n" + t
@@ -127,7 +123,7 @@ func (d *DingTalk) SendActionCardMessage(title, text string, opts ...ActionCardO
 func (d *DingTalk) SendActionCardMessageBySlice(title string, textList []string, opts ...ActionCardOption) error {
 	text := ""
 	for _, t := range textList {
-		text = text + "\n" + t
+		text = text + "\n >" + t
 	}
 	return d.sendMessage(NewActionCardMsg(title, text, opts...))
 }

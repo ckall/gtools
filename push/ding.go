@@ -123,7 +123,7 @@ func (ding *uRLLink) Send() error {
 //发送
 func (ding *text) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
-		return talk.SendTextMessage(ding.context.GetContext(), ding.opt...)
+		return talk.SendTextMessage(ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
 }
@@ -131,12 +131,7 @@ func (ding *text) Send() error {
 //发送
 func (ding *markdown) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
-		return talk.SendMarkDownMessage(ding.title, ding.context.GetContext(), ding.opt...)
+		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
 }
-
-//MarkDown格式处理
-//换行符号，颜色，链接， 图片
-//字体: 换行符，颜色，链接
-//图片: 换行符? 链接?
