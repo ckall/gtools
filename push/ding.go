@@ -2,7 +2,7 @@ package push
 
 import (
 	"errors"
-	ding "gck/push/ding/service"
+	"gck/push/ding"
 )
 
 type DingTalk interface {
@@ -11,11 +11,9 @@ type DingTalk interface {
 	Text(context string, opt ...ding.AtOption) Text
 
 	LinkMessage(title string, text string, picUrl string, msgUrl string) LinkMessage
-
 }
 
 type name struct {
-	
 }
 
 type LinkMessage interface {

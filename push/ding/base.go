@@ -1,4 +1,4 @@
-package service
+package ding
 
 type msgTypeType string
 
