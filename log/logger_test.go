@@ -10,6 +10,7 @@ func init() {
 		log.SetLogField("name1", "无敌大帅比"),
 		log.SetEnvType("test"),
 		log.SetOnlyFileSize(1),
+		log.SetFilePath("/var/log/app/%Y-%m-%d %H.log"),
 	)
 }
 

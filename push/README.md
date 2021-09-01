@@ -3,6 +3,16 @@
 
 ### dingTalk
 ```go
+    var name = "test"
+    var token = "5a3eaeb2d3f340da2fca857a58654eef325224b4d1f68611bd792da31b452215"
+    var title = "test"
+    
+    func init() {
+        push.InitKeyWordDing(
+            name,
+            token,
+        )
+    }
    //支持原生语句
    	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
    	context := ding.NewConText()
