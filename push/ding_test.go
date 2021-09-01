@@ -21,13 +21,13 @@ func TestDingTalk_Markdown(t *testing.T) {
 	//支持原生语句
 	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
 	context := ding.NewConText()
-	context.AddText("# 杭州天气")
-	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
-	context.AddKeyValue("#### 【测试】:", map[string]interface{}{"测": "试"})
-	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
-	context.AddTextUrl("###### 10点20分发布: %s 和 %s ", map[string]string{"天气": "http://www.thinkpage.cn/", "天气11": "http://www.baidu.com/"})
-	context.AddTextH1("杭 %s 和 %s", ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
-	context.AddTextH5("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
+	//context.AddText("# 杭州天气")
+	//context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
+	//context.AddKeyValue("#### 【测试】:", map[string]interface{}{"测": "试"})
+	//context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
+	context.AddTextUrl(ding.AddH1("10点20分发布: %s 和 %s "), map[string]string{ding.AddGreen("天气"): "http://www.thinkpage.cn/", ding.AddRed("天气11"): "http://www.baidu.com/"})
+	context.AddText(ding.AddH6("杭 %s 和 %s"), ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
+	//context.AddText("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
 	err := push.Ding(name).
 		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
