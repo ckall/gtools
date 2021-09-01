@@ -1,30 +1,26 @@
-# gck 
+<p align="center">
+</p>
 
-A large collection of golang general modules, integrated log system, warning push system, performance monitoring golang 通用模块大集合，集成日志系统，警告推送系统，性能监控中心
+<h1 align="center">gck</h1>
 
+<p align="center">
+A large collection of golang general modules, integrated log system, warning push system, performance monitoring 
+golang 通用模块大集合，集成日志系统，警告推送系统，性能监控中心
 
-日志系统  
-```
-  日志分割
-  格式定义
-```
-推送系统
-```
-  信息框警告：
-     钉钉   
-  邮箱警告
-     待完成    
-  电话警告 
-     待完成      
-```
-### 链路跟踪:
-```
-   * zipkin 
-```
+## 环境要求
+- 您的系统需要达到 [环境要求][Requirements], 例如，安装了不低于 1.10.x 版本的 Go 环境。
 
-## 日志模块
+## 安装
+使用 `go get` 下载安装 SDK
+
+```sh
+$ go get -u https://github.com/ckall/gck
+```
+## 快速使用
+
 
 ```go
+// 日志模块
 func init() {
 	log.InitLog(
 		log.SetLogField("name1", "无敌大帅比"),
@@ -56,9 +52,6 @@ func TestWarn(t *testing.T) {
 ```
 
 ## 钉钉的使用
-
-
-### dingTalk
 ```go
 //支持原生语句
 //context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
