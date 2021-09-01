@@ -2,19 +2,31 @@ package push
 
 import (
 	"errors"
-	"gck/push/ding"
+	ding "gck/push/ding/service"
 )
 
 type DingTalk interface {
-	Markdown(title, context string, opt ...ding.AtOption) DingMarkdown
-	Text(context string, opt ...ding.AtOption) DingText
+	Markdown(title, context string, opt ...ding.AtOption) Markdown
+
+	Text(context string, opt ...ding.AtOption) Text
+
+	LinkMessage(title string, text string, picUrl string, msgUrl string) LinkMessage
+
 }
 
-type DingMarkdown interface {
+type name struct {
+	
+}
+
+type LinkMessage interface {
 	Send() error
 }
 
-type DingText interface {
+type Markdown interface {
+	Send() error
+}
+
+type Text interface {
 	Send() error
 }
 
@@ -27,21 +39,26 @@ type dingTalk struct {
 	name string
 }
 
+type uRLLink struct {
+	dingTalk
+	title, text, picUrl, msgUrl string
+}
+
 //公共消息体
-type dingPublicMessageBody struct {
-	name    string
+type publicMessageBody struct {
+	dingTalk
 	context string
 	opt     []ding.AtOption
 }
 
 //MarkDown消息类型
-type dingMarkdown struct {
+type markdown struct {
 	title string
-	dingPublicMessageBody
+	publicMessageBody
 }
 
 //Text消息类型
-type dingText = dingPublicMessageBody
+type text = publicMessageBody
 
 /**
  * @auth: kuncheng
@@ -50,8 +67,8 @@ type dingText = dingPublicMessageBody
 //关键词初始化
 //tokens 可以发送给多个群
 //key 每个群的多个关键字验证
-func InitKeyWordDing(name, tokens string, title string) {
-	initDingTalk[name] = ding.InitDingTalk(tokens, title)
+func InitKeyWordDing(name, token string) {
+	initDingTalk[name] = ding.InitDingTalk(token)
 }
 
 //签名规则
@@ -67,8 +84,8 @@ func Ding(name string) DingTalk {
 }
 
 //发送Markdown消息
-func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) DingMarkdown {
-	initMarkDown := &dingMarkdown{
+func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) Markdown {
+	initMarkDown := &markdown{
 		title: title,
 	}
 	initMarkDown.name = ding.name
@@ -78,17 +95,35 @@ func (ding *dingTalk) Markdown(title, context string, opt ...ding.AtOption) Ding
 }
 
 //发送Text消息
-func (ding *dingTalk) Text(context string, opt ...ding.AtOption) DingText {
-	initText := &dingText{
-		name: ding.name,
-	}
+func (ding *dingTalk) Text(context string, opt ...ding.AtOption) Text {
+	initText := &text{}
+	initText.name = ding.name
 	initText.context = context
 	initText.opt = opt
 	return initText
 }
 
+//发送Text消息
+func (ding *dingTalk) LinkMessage(title string, text string, picUrl string, msgUrl string) LinkMessage {
+	initText := &uRLLink{}
+	initText.name = ding.name
+	initText.title = title
+	initText.text = text
+	initText.picUrl = picUrl
+	initText.msgUrl = msgUrl
+	return initText
+}
+
 //发送
-func (ding *dingText) Send() error {
+func (ding *uRLLink) Send() error {
+	if talk, ok := initDingTalk[ding.name]; ok {
+		return talk.SendLinkMessage(ding.title, ding.text, ding.picUrl, ding.msgUrl)
+	}
+	return errors.New("类型错误")
+}
+
+//发送
+func (ding *text) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendTextMessage(ding.context, ding.opt...)
 	}
@@ -96,9 +131,14 @@ func (ding *dingText) Send() error {
 }
 
 //发送
-func (ding *dingMarkdown) Send() error {
+func (ding *markdown) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
 	}
 	return errors.New("类型错误")
 }
+
+//MarkDown格式处理
+//换行符号，颜色，链接， 图片
+//字体: 换行符，颜色，链接
+//图片: 换行符? 链接?

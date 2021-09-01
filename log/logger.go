@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	DefaultEnvType            = "dev" //默认的开发环境
-	DefaultFileCount    uint  = 0     //0:为不限制
-	DefaultFileSize     int64 = 32 * 1024 * 1024
+	DefaultEnvType            = "dev"                  //默认的开发环境
+	DefaultFileCount    uint  = 0                      //0:为不限制
+	DefaultFileSize     int64 = 32 * 1024 * 1024       //32兆
 	DefaultFilePath           = "./glogs/%Y-%m-%d.log" //日志路径
 	DefaultTemplateJoin       = " "                    //日志分割符 msg:"信息1 信息2"
 	//错误级别
@@ -30,6 +30,7 @@ var (
 		logPath:      DefaultFilePath,
 		fileCount:    DefaultFileCount,
 		TemplateJoin: DefaultTemplateJoin,
+		logFields:    map[string]interface{}{},
 	}
 	zaplog *zap.Logger
 )
@@ -39,15 +40,16 @@ var (
  * @Date: 2021/8/28
  */
 type logConfig struct {
-	onlyFileSize int64         //单个文件大小(大小限制)
-	envType      string        //环境类型
-	fileCount    uint          //文件总数
-	logPath      string        //文件路径
-	logType      string        //输出形式（日志，工作台，日志 工作台（默认））
-	rotationTime time.Duration // 日志分割的时间
-	maxAge       time.Duration // 日志最大保留的天数
-	TemplateJoin string
+	onlyFileSize int64                  //单个文件大小(大小限制)
+	envType      string                 //环境类型
+	fileCount    uint                   //文件总数
+	logPath      string                 //文件路径
+	logType      string                 //输出形式（日志，工作台，日志 工作台（默认））
+	rotationTime time.Duration          // 日志分割的时间
+	maxAge       time.Duration          // 日志最大保留的天数
+	TemplateJoin string                 //日志分割符 msg:"信息1 信息2"
 	logFields    map[string]interface{} //日志扩展字段
+
 }
 
 //钉钉配置
