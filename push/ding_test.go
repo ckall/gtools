@@ -18,13 +18,16 @@ func init() {
 }
 
 func TestDingTalk_Markdown(t *testing.T) {
+	//支持原生语句
+	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
 	context := ding.NewConText()
 	context.AddText("# 杭州天气")
 	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
-	context.AddKeyValue("#### 【测试】:", "hahah")
+	context.AddKeyValue("#### 【测试】:", map[string]interface{}{"测": "试"})
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
-	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
-	//context.AddTextUrl("###### 10点20分发布: %s %s", []string{"天气", "http://www.thinkpage.cn/","天气", "http://www.thinkpage.cn/"})
+	context.AddTextUrl("###### 10点20分发布: %s 和 %s ", map[string]string{"天气": "http://www.thinkpage.cn/", "天气11": "http://www.baidu.com/"})
+	context.AddTextH1("杭 %s 和 %s", ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
+	context.AddTextH5("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
 	err := push.Ding(name).
 		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
@@ -34,16 +37,7 @@ func TestDingTalk_Markdown(t *testing.T) {
 }
 
 func TestDingTalk_Text(t *testing.T) {
-	context := ding.NewConText()
-	context.AddText("# 杭州天气")
-	context.AddText("### 9度，西北风1级，空气良89，相对温度73%")
-	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
-	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
-	//context.AddTextUrl("###### 10点20分发布", []string{"天气", "http://www.thinkpage.cn/"})
-	err := push.Ding(name).
-		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
-		Send()
-	err = push.Ding(name).Text(context, ding.WithAtAll()).Send()
+	err := push.Ding(name).Text("测试文本消息", ding.WithAtAll()).Send()
 	if err != nil {
 		t.Errorf("发送失败: %s", err.Error())
 	}

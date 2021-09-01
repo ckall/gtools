@@ -91,8 +91,8 @@ func (d *DingTalk) OutGoing(r io.Reader) (outGoingMsg OutGoingModel, err error) 
 	return
 }
 
-func (d *DingTalk) SendTextMessage(content Format, opt ...AtOption) error {
-	return d.sendMessage(NewTextMsg(content.GetContext(), opt...))
+func (d *DingTalk) SendTextMessage(content string, opt ...AtOption) error {
+	return d.sendMessage(NewTextMsg(content, opt...))
 }
 
 func (d *DingTalk) SendMarkDownMessage(title string, text Format, opts ...AtOption) error {

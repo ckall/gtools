@@ -21,7 +21,41 @@ type Format interface {
 
 	GetContext() string
 
-	//AddTextUrl(text string, hrefs []string)
+	AddKeyValue(title string, value interface{})
+
+	AddTextUrl(text string, hrefs map[string]string)
+
+	AddTextH1(context string, color ...interface{})
+
+	AddTextH2(context string, color ...interface{})
+
+	AddTextH3(context string, color ...interface{})
+
+	AddTextH4(context string, color ...interface{})
+
+	AddTextH5(context string, color ...interface{})
+
+	AddTextH6(context string, color ...interface{})
+}
+
+//
+func AddRed(text string) string {
+	return fmt.Sprintf(hMap[RED], text)
+}
+
+//
+func AddBlue(text string) string {
+	return fmt.Sprintf(hMap[BLUE], text)
+}
+
+//
+func AddGreen(text string) string {
+	return fmt.Sprintf(hMap[GREEN], text)
+}
+
+//
+func AddGold(text string) string {
+	return fmt.Sprintf(hMap[GOLD], text)
 }
 
 /**
@@ -32,7 +66,7 @@ type format struct {
 	text []string
 }
 
-func NewConText() *format {
+func NewConText() Format {
 	return &format{}
 }
 
@@ -50,18 +84,19 @@ func (f *format) AddImages(urls []string) {
 	}
 }
 
+//输出原生语句可以自己研究
 func (f *format) GetContext() string {
 	return strings.Join(f.text, separator)
 }
 
-//func (f *format) AddTextUrl(text string) {
-//	var href string
-//	for i := 0; i < len(hrefs); i += 2 {
-//		href += fmt.Sprintf(urlFormat, hrefs[i], hrefs[i+1])
-//	}
-//	context := text + ":" + href
-//	f.text = append(f.text, context)
-//}
+func (f *format) AddTextUrl(text string, hrefs map[string]string) {
+	var href []interface{}
+	for title, url := range hrefs {
+		href = append(href, fmt.Sprintf(urlFormat, title, url))
+	}
+	var context = fmt.Sprintf(text, href...)
+	f.text = append(f.text, context)
+}
 
 func (f *format) AddKeyValue(title string, value interface{}) {
 	var str string
@@ -73,5 +108,28 @@ func (f *format) AddKeyValue(title string, value interface{}) {
 		str = string(b)
 	}
 	f.text = append(f.text, title+str)
+}
 
+func (f *format) AddTextH1(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H1], context), color...))
+}
+
+func (f *format) AddTextH2(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H2], context), color...))
+}
+
+func (f *format) AddTextH3(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H3], context), color...))
+}
+
+func (f *format) AddTextH4(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H4], context), color...))
+}
+
+func (f *format) AddTextH5(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H5], context), color...))
+}
+
+func (f *format) AddTextH6(context string, color ...interface{}) {
+	f.text = append(f.text, fmt.Sprintf(fmt.Sprintf(hMap[H6], context), color...))
 }

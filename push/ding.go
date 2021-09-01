@@ -8,9 +8,9 @@ import (
 type DingTalk interface {
 	Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown
 
-	Text(context ding.Format, opt ...ding.AtOption) Text
+	Text(context string, opt ...ding.AtOption) Text
 
-	//Link(title string, text ding.Context, picUrl string, msgUrl string) LinkMessage
+	//Link(title string, text ding.Format, picUrl string, msgUrl string) LinkMessage
 	//ACTION_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
 	//FEED_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
 
@@ -45,13 +45,14 @@ type uRLLink struct {
 //公共消息体
 type publicMessageBody struct {
 	dingTalk
-	context ding.Format
+	context string
 	opt     []ding.AtOption
 }
 
 //MarkDown消息类型
 type markdown struct {
-	title string
+	title   string
+	context ding.Format
 	publicMessageBody
 }
 
@@ -93,7 +94,7 @@ func (ding *dingTalk) Markdown(title string, context ding.Format, opt ...ding.At
 }
 
 //发送Text消息
-func (ding *dingTalk) Text(context ding.Format, opt ...ding.AtOption) Text {
+func (ding *dingTalk) Text(context string, opt ...ding.AtOption) Text {
 	initText := &text{}
 	initText.name = ding.name
 	initText.context = context
