@@ -6,24 +6,23 @@ import (
 )
 
 type DingTalk interface {
+	//Markdown模版类型
 	Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown
-
+	//Text模版类型
 	Text(context string, opt ...ding.AtOption) Text
-
-	//Link(title string, text ding.Format, picUrl string, msgUrl string) LinkMessage
-	//ACTION_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
-	//FEED_CARD(title string, text string, picUrl string, msgUrl string) LinkMessage
-
 }
 
+//链接模版类型接口访问
 type LinkMessage interface {
 	Send() error
 }
 
+//Markdown模版类型接口访问
 type Markdown interface {
 	Send() error
 }
 
+//文本类型接口访问
 type Text interface {
 	Send() error
 }
@@ -113,7 +112,7 @@ func (ding *dingTalk) Link(title string, text string, picUrl string, msgUrl stri
 	return initText
 }
 
-//发送
+//发送链接
 func (ding *uRLLink) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendLinkMessage(ding.title, ding.text, ding.picUrl, ding.msgUrl)
@@ -121,7 +120,7 @@ func (ding *uRLLink) Send() error {
 	return errors.New("类型错误")
 }
 
-//发送
+//发送文本内容
 func (ding *text) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendTextMessage(ding.context, ding.opt...)
@@ -129,7 +128,7 @@ func (ding *text) Send() error {
 	return errors.New("类型错误")
 }
 
-//发送
+//发送markdown内容
 func (ding *markdown) Send() error {
 	if talk, ok := initDingTalk[ding.name]; ok {
 		return talk.SendMarkDownMessage(ding.title, ding.context, ding.opt...)
