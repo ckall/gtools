@@ -1,8 +1,8 @@
-<p align="center">
-
 <h1 align="center">GTools</h1>
-
 <p align="center">
+<a href="https://travis-ci.org/ckall/gtools"><img src="https://app.travis-ci.com/ckall/gtools.svg?branch=dev" alt="Travis Build Status"></a>
+</p>
+
 A large collection of golang general modules, integrated log system, warning push system, performance monitoring 
 golang 通用模块大集合，集成日志系统，警告推送系统，性能监控中心
 
