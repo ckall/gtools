@@ -61,7 +61,7 @@ func Request(ctx context.Context, callMethod string, endPoint string, header map
 		return nil, err
 	}
 	if response == nil {
-		return nil, fmt.Errorf("reponse is nil, please check it")
+		return nil, fmt.Errorf("response is nil, please check it")
 	}
 
 	return response, nil
