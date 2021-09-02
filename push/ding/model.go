@@ -3,7 +3,6 @@ package ding
 import (
 	"fmt"
 	jsoniter "github.com/json-iterator/go"
-	"strings"
 )
 
 type iDingMsg interface {
@@ -216,31 +215,4 @@ func (d *dingMap) Remove(val string) {
 		}
 		delete(d.m, val)
 	}
-}
-
-func (d *dingMap) Slice() []string {
-	resList := make([]string, 0, len(d.l))
-	for _, val := range d.l {
-		content := d.formatVal(val, d.m[val])
-		resList = append(resList, content)
-	}
-	return resList
-}
-
-func (d *dingMap) formatVal(val string, t MarkType) (res string) {
-	var ok bool
-	if res, ok = hMap[t]; ok {
-		vl := strings.Split(val, formatSpliter)
-		if len(vl) == 3 {
-			res = fmt.Sprintf(res, vl[1])
-			res = vl[0] + res + vl[2]
-		} else {
-			res = fmt.Sprintf(res, val)
-		}
-	} else {
-		res = val
-	}
-	//if !strings.HasPrefix(res, "- ") && !strings.HasPrefix(res, "#") {
-	//}
-	return
 }

@@ -1,6 +1,8 @@
 package push_test
 
 import (
+	"github.com/ckall/gomarkdown"
+	"github.com/ckall/gomarkdown/style"
 	"github.com/ckall/gtools/push"
 	"github.com/ckall/gtools/push/ding"
 	"testing"
@@ -20,23 +22,23 @@ func init() {
 func TestDingTalk_Markdown(t *testing.T) {
 	//支持原生语句
 	//context.AddText("###### 10点20分发布 [天气](http://www.thinkpage.cn/)")
-	context := ding.NewConText()
+	context := gomarkdown.NewConText()
 	context.AddText("# 杭州天气")
-	context.AddText(ding.AddH3("9度，西北风1级，空气良89，相对温度73%"))
+	context.AddText(style.AddH3("9度，西北风1级，空气良89，相对温度73%"))
 	context.AddKeyValue("#### 【测试】:", map[string]interface{}{"测": "试"})
-	context.AddKeyValue(ding.AddH4("【测试】:"), map[string]interface{}{"测": "试"})
+	context.AddKeyValue(style.AddH4("【测试】:"), map[string]interface{}{"测": "试"})
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
 	context.AddText(
-		ding.AddH4("10点20分发布: %s 和 %s "),
-		ding.AddUrl(ding.AddRed("天气"), "http://www.thinkpage.cn/"),
-		ding.AddUrl(ding.AddBlue("天气11"), "http://www.baidu.com/"),
+		style.AddH4("10点20分发布: %s 和 %s "),
+		style.AddUrl(style.AddRed("天气"), "http://www.thinkpage.cn/"),
+		style.AddUrl(style.AddBlue("天气11"), "http://www.baidu.com/"),
 	)
-	context.AddText(ding.AddH6("杭 %s 和 %s"), ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
-	context.AddText("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
+	context.AddText(style.AddH6("杭 %s 和 %s"), style.AddRed("hiehie"), style.AddBlue("hiehie"))
+	context.AddText("杭 %s 和 %s", style.AddGreen("hiehie"), style.AddGold("hiehie"))
 	t.Log(context.GetContext())
 	err := push.Ding(name).
-		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
+		Markdown(title, context.GetContext(), ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
 	if err != nil {
 		t.Errorf("发送失败: %s", err.Error())

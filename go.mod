@@ -3,6 +3,7 @@ module github.com/ckall/gtools
 go 1.15
 
 require (
+	github.com/ckall/gomarkdown v1.0.0
 	github.com/json-iterator/go v1.1.11
 	github.com/mkevac/debugcharts v0.0.0-20191222103121-ae1c48aa8615
 	github.com/pkg/errors v0.9.1

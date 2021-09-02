@@ -95,8 +95,8 @@ func (d *DingTalk) SendTextMessage(content string, opt ...AtOption) error {
 	return d.sendMessage(NewTextMsg(content, opt...))
 }
 
-func (d *DingTalk) SendMarkDownMessage(title string, text Format, opts ...AtOption) error {
-	return d.sendMessage(NewMarkDownMsg(title, text.GetContext(), opts...))
+func (d *DingTalk) SendMarkDownMessage(title string, text string, opts ...AtOption) error {
+	return d.sendMessage(NewMarkDownMsg(title, text, opts...))
 }
 
 // 利用dtmd发送点击消息

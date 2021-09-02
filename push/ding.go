@@ -7,7 +7,7 @@ import (
 
 type DingTalk interface {
 	//Markdown模版类型
-	Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown
+	Markdown(title string, context string, opt ...ding.AtOption) Markdown
 	//Text模版类型
 	Text(context string, opt ...ding.AtOption) Text
 }
@@ -51,7 +51,7 @@ type publicMessageBody struct {
 //MarkDown消息类型
 type markdown struct {
 	title   string
-	context ding.Format
+	context string
 	publicMessageBody
 }
 
@@ -82,7 +82,7 @@ func Ding(name string) DingTalk {
 }
 
 //发送Markdown消息
-func (ding *dingTalk) Markdown(title string, context ding.Format, opt ...ding.AtOption) Markdown {
+func (ding *dingTalk) Markdown(title string, context string, opt ...ding.AtOption) Markdown {
 	initMarkDown := &markdown{
 		title: title,
 	}
