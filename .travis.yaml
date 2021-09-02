@@ -17,6 +17,9 @@ notifications:
     on_success: change
     on_failure: always
 
+before_install:
+  - go mod tidy
+
 script:
 #  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
   - go test -race -coverprofile=coverage.txt -covermode=atomic ./log
