@@ -1,5 +1,6 @@
 module github.com/ckall/gtools
 
+go 1.15
 
 require (
 	github.com/json-iterator/go v1.1.11

@@ -2,7 +2,7 @@ package push
 
 import (
 	"errors"
-	"gck/push/ding"
+	"github.com/ckall/gtools/push/ding"
 )
 
 type DingTalk interface {

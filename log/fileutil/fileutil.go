@@ -1,11 +1,11 @@
 package fileutil
 
 import (
+	"github.com/ckall/gtools/log/strftime"
 	"os"
 	"path/filepath"
 	"time"
 
-	"gck/log/strftime"
 	"github.com/pkg/errors"
 )
 
