@@ -28,9 +28,13 @@
     context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
    	//添加图片
     context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
-   	//添加文字并且还要颜色
-    context.AddTextUrl(ding.AddH1("10点20分发布: %s 和 %s "), map[string]string{ding.AddGreen("天气"): "http://www.thinkpage.cn/", ding.AddRed("天气11"): "http://www.baidu.com/"})
-   	//添加文本
+   	//添加文字，里面包含跳转链接，并且还要带颜色
+    context.AddText(
+    		ding.AddH4("10点20分发布: %s 和 %s "),
+    		ding.AddUrl(ding.AddRed("天气"), "http://www.thinkpage.cn/"),
+    		ding.AddUrl(ding.AddBlue("天气11"), "http://www.baidu.com/"),
+    )
+    //添加文本
     context.AddText(ding.AddH6("杭 %s 和 %s"), ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
    	context.AddText("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
    	//发送

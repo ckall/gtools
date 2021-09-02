@@ -27,7 +27,11 @@ func TestDingTalk_Markdown(t *testing.T) {
 	context.AddKeyValue(ding.AddH4("#### 【测试】:"), map[string]interface{}{"测": "试"})
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
-	context.AddTextUrl(ding.AddH1("10点20分发布: %s 和 %s "), map[string]string{ding.AddGreen("天气"): "http://www.thinkpage.cn/", ding.AddRed("天气11"): "http://www.baidu.com/"})
+	context.AddText(
+		ding.AddH4("10点20分发布: %s 和 %s "),
+		ding.AddUrl(ding.AddRed("天气"), "http://www.thinkpage.cn/"),
+		ding.AddUrl(ding.AddBlue("天气11"), "http://www.baidu.com/"),
+	)
 	context.AddText(ding.AddH6("杭 %s 和 %s"), ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
 	context.AddText("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
 	err := push.Ding(name).
