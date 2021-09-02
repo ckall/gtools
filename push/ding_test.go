@@ -24,7 +24,7 @@ func TestDingTalk_Markdown(t *testing.T) {
 	context.AddText("# 杭州天气")
 	context.AddText(ding.AddH3("9度，西北风1级，空气良89，相对温度73%"))
 	context.AddKeyValue("#### 【测试】:", map[string]interface{}{"测": "试"})
-	context.AddKeyValue(ding.AddH4("#### 【测试】:"), map[string]interface{}{"测": "试"})
+	context.AddKeyValue(ding.AddH4("【测试】:"), map[string]interface{}{"测": "试"})
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
 	context.AddImage("https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png")
 	context.AddText(
@@ -34,6 +34,7 @@ func TestDingTalk_Markdown(t *testing.T) {
 	)
 	context.AddText(ding.AddH6("杭 %s 和 %s"), ding.AddRed("hiehie"), ding.AddBlue("hiehie"))
 	context.AddText("杭 %s 和 %s", ding.AddGreen("hiehie"), ding.AddGold("hiehie"))
+	t.Log(context.GetContext())
 	err := push.Ding(name).
 		Markdown(title, context, ding.WithAtMobiles([]string{"1731122967*"})).
 		Send()
