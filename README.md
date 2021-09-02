@@ -2,6 +2,7 @@
 <p align="center">
 <a href="https://travis-ci.org/ckall/gtools"><img src="https://app.travis-ci.com/ckall/gtools.svg?branch=main" alt="Travis Build Status"></a>
 <a href="https://badge.fury.io/gh/ckall%2Fgtools"><img src="https://badge.fury.io/gh/ckall%2Fgtools.svg" alt="GitHub version" height="18"></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fckall%2Fgtools?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fckall%2Fgtools.svg?type=shield"/></a>
 </p>
 
 A large collection of golang general modules, integrated log system, warning push system, performance monitoring 
