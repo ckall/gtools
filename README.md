@@ -7,6 +7,8 @@ A large collection of golang general modules, integrated log system, warning pus
 golang 通用模块大集合，集成日志系统，警告推送系统，性能监控中心
 
 ## 环境要求
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fckall%2Fgtools.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fckall%2Fgtools?ref=badge_shield)
+
 - 您的系统需要达到 [环境要求][Requirements], 例如，安装了不低于 1.10.x 版本的 Go 环境。
 
 ## 安装
@@ -118,3 +120,6 @@ func init() {
 ##### CPU火焰图本地运行go tool pprof -http=:8081 http://HOST:PORT/debug/pprof/profile?seconds=10
 
 ##### 实时监控访问http://HOST:PORT/debug/charts
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fckall%2Fgtools.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fckall%2Fgtools?ref=badge_large)
