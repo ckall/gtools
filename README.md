@@ -13,7 +13,7 @@ golang 通用模块大集合，集成日志系统，警告推送系统，性能�
 使用 `go get` 下载安装 SDK
 
 ```sh
-$ go get -u https://github.com/ckall/gtools
+$ go get -u github.com/ckall/gtools
 ```
 ## 快速使用
 
