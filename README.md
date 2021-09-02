@@ -1,7 +1,6 @@
 <p align="center">
-</p>
 
-<h1 align="center">gck</h1>
+<h1 align="center">GTools</h1>
 
 <p align="center">
 A large collection of golang general modules, integrated log system, warning push system, performance monitoring 
@@ -14,7 +13,7 @@ golang 通用模块大集合，集成日志系统，警告推送系统，性能�
 使用 `go get` 下载安装 SDK
 
 ```sh
-$ go get -u https://github.com/ckall/gck
+$ go get -u github.com/ckall/gtools
 ```
 ## 快速使用
 
@@ -110,7 +109,7 @@ func init() {
 
 ## 性能监控
     
-##### 首先你得线安装[graphviz](http://www.graphviz.org/download/)
+##### 首先你得线安装: [graphviz](http://www.graphviz.org/download/)
 
 ##### 访问http://HOST:PORT/debug/pprof
 
