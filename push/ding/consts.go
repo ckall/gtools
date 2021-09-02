@@ -5,28 +5,28 @@ const dtmdFormat = "[%s](dtmd://dingtalkclient/sendMessage?content=%s)"
 const formatSpliter = "$$"
 
 const (
-	H1    MarkType = "h1"
-	H2    MarkType = "h2"
-	H3    MarkType = "h3"
-	H4    MarkType = "h4"
-	H5    MarkType = "h5"
-	H6    MarkType = "h6"
-	RED   MarkType = "red"
-	BLUE  MarkType = "blue"
-	GREEN MarkType = "green"
-	GOLD  MarkType = "gold"
-	N     MarkType = ""
+	h1    MarkType = "h1"
+	h2    MarkType = "h2"
+	h3    MarkType = "h3"
+	h4    MarkType = "h4"
+	h5    MarkType = "h5"
+	h6    MarkType = "h6"
+	red   MarkType = "red"
+	blue  MarkType = "blue"
+	green MarkType = "green"
+	gold  MarkType = "gold"
+	n     MarkType = ""
 )
 
 var hMap = map[MarkType]string{
-	H1:    "# %s",
-	H2:    "## %s",
-	H3:    "### %s",
-	H4:    "#### %s",
-	H5:    "##### %s",
-	H6:    "###### %s",
-	RED:   "<font color=#ff0000>%s</font>",
-	BLUE:  "<font color=#1E90FF>%s</font>",
-	GREEN: "<font color=#00CD66>%s</font>",
-	GOLD:  "<font color=#FFD700>%s</font>",
+	h1:    "# %s",
+	h2:    "## %s",
+	h3:    "### %s",
+	h4:    "#### %s",
+	h5:    "##### %s",
+	h6:    "###### %s",
+	red:   "<font color=#ff0000>%s</font>",
+	blue:  "<font color=#1E90FF>%s</font>",
+	green: "<font color=#00CD66>%s</font>",
+	gold:  "<font color=#FFD700>%s</font>",
 }
