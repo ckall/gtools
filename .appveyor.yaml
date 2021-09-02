@@ -1,0 +1,24 @@
+
+
+build: on
+
+clone_folder: c:\gopath\src\github.com\ckall\gtools
+
+environment:
+  GOPATH: c:\gopath
+  matrix:
+    - go: 1.15.x
+
+platform:
+  - x64
+
+install:
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+
+test_script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./log
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./pprof
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./push
+  -
+after_test:
+  - bash <(curl -s https://codecov.io/bash)
