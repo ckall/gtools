@@ -1,0 +1,28 @@
+language: go
+
+go:
+  - 1.10.x
+  - 1.12.x
+  - 1.14.x
+  - 1.15.x
+  - 1.16.x
+  - 1.17.x
+
+
+branches:
+  only:
+    - dev
+
+notifications:
+  webhooks:
+    urls:
+      - hhttps://oapi.dingtalk.com/robot/send?access_token=b3d95400feebf5e364577cad42b02a7a008f84297f3d4c1be770c79eb950ccda
+    on_success: change
+    on_failure: always
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
