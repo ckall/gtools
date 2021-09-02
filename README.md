@@ -1,6 +1,7 @@
 <h1 align="center">GTools</h1>
 <p align="center">
 <a href="https://travis-ci.org/ckall/gtools"><img src="https://app.travis-ci.com/ckall/gtools.svg?branch=main" alt="Travis Build Status"></a>
+<a href="https://badge.fury.io/gh/ckall%2Fgtools"><img src="https://badge.fury.io/gh/ckall%2Fgtools.svg" alt="GitHub version" height="18"></a>
 </p>
 
 A large collection of golang general modules, integrated log system, warning push system, performance monitoring 
