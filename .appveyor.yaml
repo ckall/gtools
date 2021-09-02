@@ -1,11 +1,11 @@
 
 
 build: on
-
-clone_folder: c:\gopath\src\github.com\ckall\gtools
+  C:\go\projects\gtools
+clone_folder: C:\go\projects\gtools
 
 environment:
-  GOPATH: c:\gopath
+  GOPATH: C:\go
   matrix:
     - go: 1.15.x
 
