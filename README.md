@@ -12,7 +12,7 @@ A large collection of golang general modules, integrated log system, warning pus
 golang 通用模块大集合，集成日志系统，警告推送系统，性能监控中心
 
 ## 环境要求
-- 您的系统需要达到 [环境要求][Requirements], 例如，安装了不低于 1.10.x 版本的 Go 环境。
+- 您的系统需要达到环境要求, 例如，安装了不低于 1.10.x 版本的 Go 环境。
 
 ## 安装
 使用 `go get` 下载安装 SDK
@@ -26,7 +26,7 @@ golang 通用模块大集合，集成日志系统，警告推送系统，性能�
 ```go
 // 日志模块
 func init() {
-	log.InitLog(
+    log.InitLog(
 		log.SetLogField("name1", "无敌大帅比"),
 		log.SetEnvType("test"),
 		log.SetOnlyFileSize(1),
@@ -110,7 +110,7 @@ if err != nil {
 func init() {
 	pprof.InitChart(":25678")
 }
-````
+```
 
 ## 性能监控
     
