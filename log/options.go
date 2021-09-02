@@ -1,9 +1,8 @@
 package log
 
 import (
+	"github.com/ckall/gtools/log/option"
 	"time"
-
-	"gck/log/option"
 )
 
 const (

@@ -1,11 +1,10 @@
 package log
 
 import (
+	"github.com/ckall/gtools/log/strftime"
 	"os"
 	"sync"
 	"time"
-
-	"gck/log/strftime"
 )
 
 type Handler interface {

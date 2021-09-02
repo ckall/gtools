@@ -1,8 +1,8 @@
 package push_test
 
 import (
-	"gck/push"
-	"gck/push/ding"
+	"github.com/ckall/gtools/push"
+	"github.com/ckall/gtools/push/ding"
 	"testing"
 )
 

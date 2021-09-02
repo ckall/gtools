@@ -6,6 +6,9 @@ package log
 
 import (
 	"fmt"
+	"github.com/ckall/gtools/log/fileutil"
+	"github.com/ckall/gtools/log/strftime"
+	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"os"
@@ -15,10 +18,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"gck/log/fileutil"
-	"gck/log/strftime"
-	"github.com/pkg/errors"
 )
 
 func (c clockFn) Now() time.Time {

@@ -1,7 +1,7 @@
 package log_test
 
 import (
-	"gck/log"
+	"github.com/ckall/gtools/log"
 	"testing"
 )
 
