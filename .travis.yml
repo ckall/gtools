@@ -21,7 +21,10 @@ notifications:
     on_failure: always
 
 script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+#  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./log
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./pprof
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./push
 
 
 after_success:
