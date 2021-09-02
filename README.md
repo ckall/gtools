@@ -109,7 +109,7 @@ func init() {
 
 ## 性能监控
     
-##### 首先你得线安装[graphviz](http://www.graphviz.org/download/)
+##### 首先你得线安装: [graphviz](http://www.graphviz.org/download/)
 
 ##### 访问http://HOST:PORT/debug/pprof
 
