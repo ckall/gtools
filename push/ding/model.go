@@ -89,7 +89,7 @@ func (m markDownMsg) Marshaler() []byte {
 func NewDTMDMsg(title string, dtmdMap *dingMap, opts ...AtOption) *markDownMsg {
 	text := ""
 	for _, v := range dtmdMap.l {
-		text = text + "\n - " + fmt.Sprintf(dtmdFormat, v, dtmdMap.m[v])
+		text = text + "\n > " + fmt.Sprintf(dtmdFormat, v, dtmdMap.m[v])
 	}
 	return NewMarkDownMsg(title, text, opts...)
 }
